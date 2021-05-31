@@ -48,7 +48,7 @@ class ProductListResource(Resource):
 class ProductResource(Resource):
     def get(self, product_id):
         product = Product.query.get_or_404(product_id)
-        return user_schema.dump(product)
+        return product_schema.dump(product)
     
     def put(self, product_id):
         product = Product.query.get_or_404(product_id)

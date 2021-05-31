@@ -1,14 +1,14 @@
 version: "3.2"
 services:
-  # rabbitmq:
-  #   image: rabbitmq:3-management-alpine
-  #   container_name: 'rabbitmq'
-  #   ports:
-  #       - 5672:5672
-  #       - 15672:15672
-  #   volumes:
-  #       - ./.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-  #       - ./.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ./.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ./.docker-conf/rabbitmq/log/:/var/log/rabbitmq
   users:
     volumes:
         - ./usuarios/:/mnt/
@@ -21,6 +21,27 @@ services:
     build: ./productos
     working_dir: /backend/
     command: sh run.sh
+  orders:
+    volumes:
+        - ./ordenes/:/mnt/
+    build: ./ordenes
+    working_dir: /backend/
+    command: sh run.sh
+    depends_on:
+      - users
+      - products
+      - rabbitmq
+  worker:
+    volumes:
+      - ./ordenes/:/mnt/
+    build: ./ordenes
+    working_dir: /backend/
+    command: python worker.py
+    depends_on:
+      - users
+      - products
+      - rabbitmq
+
   nginx:
     image: nginx:latest
     ports:
@@ -28,5 +49,5 @@ services:
     volumes:
         - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
-        - users
-        - products
+        - orders
+        - worker
