@@ -1,17 +1,36 @@
-from api import db, Order
-import pika
-import time
+from flask import Flask, request, jsonify
+from flask_sqlalchemy import SQLAlchemy
+from flask_marshmallow import Marshmallow
+from flask_restful import Api, Resource
 import requests
+from redis import Redis
+from rq import Queue
 
-time.sleep(30)
 
-connection = pika.BlockingConnection(pika.ConnectionParameters(host='rabbitmq'))
-channel = connection.channel()
-channel.queue_declare(queue='task_queue', durable=True)
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////mnt/ordenes.db'
+db = SQLAlchemy(app)
+ma = Marshmallow(app)
+api = Api(app)
+q = Queue(connection=Redis(host='redis', port=6379, db=0))
 
-def callback(ch, method, properties, body):
-    message = body.decode()
-    order_id = int(message)
+class Order(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.Integer)
+    product = db.Column(db.Integer)
+    quantity = db.Column(db.Integer)
+    state = db.Column(db.String(100))
+
+
+class OrderSchema(ma.SQLAlchemyAutoSchema):
+    class Meta:
+        fields = ("id", "user", "prodcut", "quantity", "state")
+
+
+order_schema = OrderSchema()
+orders_schema = OrderSchema(many=True)
+
+def process_order(order_id):
     order = Order.query.get(order_id)
     product = requests.get(f"http://products:5000/products/{order.product}")
     product = product.json()
@@ -21,9 +40,3 @@ def callback(ch, method, properties, body):
     else:
         order.state = "failed"
     db.session.commit()
-    ch.basic_ack(delivery_tag=method.delivery_tag)
-
-
-channel.basic_qos(prefetch_count=1)
-channel.basic_consume(queue='task_queue', on_message_callback=callback)
-channel.start_consuming()

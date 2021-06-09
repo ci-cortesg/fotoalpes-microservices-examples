@@ -6,3 +6,5 @@ SQLAlchemy
 marshmallow-sqlalchemy
 requests
 pika
+redis
+rq
