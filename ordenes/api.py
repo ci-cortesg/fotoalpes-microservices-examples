@@ -1,5 +1,7 @@
 import requests
-from worker import app, api, ma, db, Order, order_schema, orders_schema, q, process_order, Resource, Flask, request, jsonify
+from worker import app, api, ma, db, Order, User, Product, order_schema, orders_schema, q, process_order, Resource, Flask, request, jsonify
+
+
 
 class OrderListResource(Resource):
     def get(self):
@@ -7,9 +9,9 @@ class OrderListResource(Resource):
         return orders_schema.dump(orders)
 
     def post(self):
-        user = requests.get(f"http://users:5000/users/{request.json['user']}")
-        product = requests.get(f"http://products:5000/products/{request.json['product']}")
-        if user.status_code==200 and product.status_code==200:
+        user = User.query.get(request.json['user'])
+        product = Product.query.get(request.json['product'])
+        if user is not None and product is not None:
             new_order = Order(
                 user=request.json['user'],
                 product=request.json['product'],

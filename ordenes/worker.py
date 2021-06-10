@@ -21,6 +21,17 @@ class Order(db.Model):
     quantity = db.Column(db.Integer)
     state = db.Column(db.String(100))
 
+class Product(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50))
+    description = db.Column(db.String(200))
+    value = db.Column(db.Integer)
+    stock = db.Column(db.Integer)
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True)
+
 
 class OrderSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
@@ -32,10 +43,9 @@ orders_schema = OrderSchema(many=True)
 
 def process_order(order_id):
     order = Order.query.get(order_id)
-    product = requests.get(f"http://products:5000/products/{order.product}")
-    product = product.json()
-    if product['stock'] >= order.quantity:
-        requests.put(f"http://products:5000/products/{order.product}", json={'stock': product['stock']-order.quantity})
+    product = Product.query.get(order.product)
+    if product.stock >= order.quantity:
+        product.stock = product.stock-order.quantity
         order.state = "completed"
     else:
         order.state = "failed"

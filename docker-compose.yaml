@@ -10,12 +10,16 @@ services:
     build: ./usuarios
     working_dir: /backend/
     command: sh run.sh
+    depends_on: 
+      - redis
   products:
     volumes:
         - ./productos/:/mnt/
     build: ./productos
     working_dir: /backend/
     command: sh run.sh
+    depends_on: 
+      - redis
   orders:
     volumes:
         - ./ordenes/:/mnt/

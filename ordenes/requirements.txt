@@ -5,6 +5,5 @@ Flask-SQLAlchemy
 SQLAlchemy
 marshmallow-sqlalchemy
 requests
-pika
 redis
 rq
