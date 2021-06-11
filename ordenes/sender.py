@@ -1,4 +1,4 @@
-from worker import Product, User, db
+from base import Product, User, db
 
 def send_product(product_data):
     product = Product(

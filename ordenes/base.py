@@ -5,6 +5,7 @@ from flask_restful import Api, Resource
 import requests
 from redis import Redis
 from rq import Queue
+from updater import update_product
 
 
 app = Flask(__name__)
@@ -13,6 +14,7 @@ db = SQLAlchemy(app)
 ma = Marshmallow(app)
 api = Api(app)
 q = Queue(connection=Redis(host='redis', port=6379, db=0))
+q2 = Queue(connection=Redis(host='redis', port=6379, db=1))
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -46,6 +48,10 @@ def process_order(order_id):
     product = Product.query.get(order.product)
     if product.stock >= order.quantity:
         product.stock = product.stock-order.quantity
+        q2.enqueue(update_product, {
+            'id': product.id,
+            'quantity': order.quantity
+        })
         order.state = "completed"
     else:
         order.state = "failed"

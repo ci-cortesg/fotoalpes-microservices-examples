@@ -1,5 +1,5 @@
 import requests
-from worker import app, api, ma, db, Order, User, Product, order_schema, orders_schema, q, process_order, Resource, Flask, request, jsonify
+from base import app, api, ma, db, Order, User, Product, order_schema, orders_schema, q, process_order, Resource, Flask, request, jsonify
 
 
 
