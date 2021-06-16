@@ -4,31 +4,53 @@ services:
     image: redis
     volumes: 
       - ./data:/data
-  users:
+  users-commands:
     volumes:
         - ./usuarios/:/mnt/
     build: ./usuarios
     working_dir: /backend/
-    command: sh run.sh
+    command: sh run_commands.sh
     depends_on: 
       - redis
-  products:
+  users-queries:
+    volumes:
+        - ./usuarios/:/mnt/
+    build: ./usuarios
+    working_dir: /backend/
+    command: sh run_queries.sh
+    depends_on: 
+      - redis
+  products-commands:
     volumes:
         - ./productos/:/mnt/
     build: ./productos
     working_dir: /backend/
-    command: sh run.sh
+    command: sh run_commands.sh
     depends_on: 
       - redis
-  orders:
+  products-queries:
+    volumes:
+        - ./productos/:/mnt/
+    build: ./productos
+    working_dir: /backend/
+    command: sh run_queries.sh
+    depends_on: 
+      - redis
+  orders-commands:
     volumes:
         - ./ordenes/:/mnt/
     build: ./ordenes
     working_dir: /backend/
-    command: sh run.sh
+    command: sh run_commands.sh
     depends_on:
-      - users
-      - products
+      - redis
+  orders-queries:
+    volumes:
+        - ./ordenes/:/mnt/
+    build: ./ordenes
+    working_dir: /backend/
+    command: sh run_queries.sh
+    depends_on:
       - redis
   worker-orders:
     volumes:
@@ -37,8 +59,6 @@ services:
     working_dir: /backend/
     command: rq worker -u 'redis://redis/0'
     depends_on:
-      - users
-      - products
       - redis
   worker-products:
     volumes:
@@ -47,8 +67,6 @@ services:
     working_dir: /backend/
     command: rq worker -u 'redis://redis/1'
     depends_on:
-      - users
-      - products
       - redis
 
   nginx:
@@ -58,6 +76,9 @@ services:
     volumes:
         - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
-        - orders
-        - worker-orders
-        - worker-products
+        - orders-commands
+        - orders-queries
+        - users-commands
+        - users-queries
+        - products-commands
+        - products-queries

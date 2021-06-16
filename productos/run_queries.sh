@@ -1,2 +1,2 @@
 python build_database.py
-python api.py
+python api_queries.py

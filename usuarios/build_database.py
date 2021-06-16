@@ -1,2 +1,2 @@
-from api import db
+from base import db
 db.create_all()

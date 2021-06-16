@@ -1,12 +1,8 @@
-import requests
 from base import app, api, ma, db, Order, User, Product, order_schema, orders_schema, q, process_order, Resource, Flask, request, jsonify
 
 
 
 class OrderListResource(Resource):
-    def get(self):
-        orders = Order.query.all()
-        return orders_schema.dump(orders)
 
     def post(self):
         user = User.query.get(request.json['user'])
@@ -27,15 +23,9 @@ class OrderListResource(Resource):
             return {"error": "The product or the user dont exist"}, 400
 
 
-class OrderResource(Resource):
-    def get(self, order_id):
-        order = Order.query.get_or_404(order_id)
-        return order_schema.dump(order)
 
 
-
-api.add_resource(OrderListResource, '/orders')
-api.add_resource(OrderResource, '/orders/<int:order_id>')
+api.add_resource(OrderListResource, '/api-commands/orders')
 
 
 if __name__ == '__main__':
