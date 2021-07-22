@@ -10,7 +10,7 @@ sh install.sh
 
 ## Running
 
-To run the application we run the following command
+To run the application we run the following command.
 
 
 ```
