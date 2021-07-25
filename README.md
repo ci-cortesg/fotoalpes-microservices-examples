@@ -61,7 +61,7 @@ Este servicio expone tres operaciones:
 - Crear un nuevo usuario: UserListResource - post
 - Consultar un usuario específico: UserResource - get
 
-API Gateway
+#### API Gateway
 
 En este ejemplo se utiliza la configuración proxy del servidor Ngnix para implementar el componente API Gateway. Este configuración permite que todas las solicitudes se hagan al servidor Ngnix y este redireccione al servicio correspondiente de acuerdo a la ruta especificada en el url, por ejemplo http://localhost/users:
 
