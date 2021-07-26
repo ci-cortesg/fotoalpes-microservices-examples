@@ -16,21 +16,21 @@ Para ejecutar el proyecto es necesario instalar [Oracle VirtualBox](https://www.
 
 3. Abrir Oracle Virtualbox e ir al menú Máquina --> Añadir
 
-   ![Agregar_VM](C:\Users\Carlos Cortes\Documents\Uniandes\Asistencia Graduada\MISO\Curso AAS\Ejemplo Foto AlpesV2\img\Agregar_VM.png)
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Agregar_VM.png" alt="Agregar_VM" style="zoom:75%;" />
 
 4. Ubicar la carpeta donde se descomprimió el archivo zip y seleccionar el archivo MISW4202-FotoAlpes-Microservicios-New.ovdx
 
-   <img src="C:\Users\Carlos Cortes\Documents\Uniandes\Asistencia Graduada\MISO\Curso AAS\Ejemplo Foto AlpesV2\img\Seleccionar_Archivo_VM.png" alt="Seleccionar_Archivo_VM" style="zoom:75%;" />
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Seleccionar_Archivo_VM.png" alt="Seleccionar_Archivo_VM" style="zoom:75%;" />
 
 5. En el menú izquierdo debe aparecer la máquina con el nombre del archivo seleccionado
 
 6. Dar clic en el botón Iniciar ubicado en la parte superior
 
-   <img src="C:\Users\Carlos Cortes\Documents\Uniandes\Asistencia Graduada\MISO\Curso AAS\Ejemplo Foto AlpesV2\img\Iniciar_VM.png" alt="Iniciar_VM" style="zoom:75%;" />
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Iniciar_VM.png" alt="Iniciar_VM" style="zoom:75%;" />
 
 7. Una vez la máquina termine de cargar, debe visualizar la pantalla de inicio
 
-   <img src="C:\Users\Carlos Cortes\Documents\Uniandes\Asistencia Graduada\MISO\Curso AAS\Ejemplo Foto AlpesV2\img\Pantalla_Inicio_VM.png" alt="Pantalla_Inicio_VM" style="zoom:75%;" />
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Pantalla_Inicio_VM.png" alt="Pantalla_Inicio_VM" style="zoom:75%;" />
 
 8. Ingresar con el usuario **estudiante** y la contraseña **Estudiante2021**
 
@@ -42,7 +42,7 @@ Para ejecutar el proyecto es necesario instalar [Oracle VirtualBox](https://www.
 
 10. Tomar nota de la dirección ip que se despliega en pantalla, como aparece en la siguiente imagen:
 
-    <img src="C:\Users\Carlos Cortes\Documents\Uniandes\Asistencia Graduada\MISO\Curso AAS\Ejemplo Foto AlpesV2\img\Direccion_IP_VM.png" alt="Direccion_IP_VM" style="zoom:75%;" />
+    <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Direccion_IP_VM.png" alt="Direccion_IP_VM" style="zoom:75%;" />
 
 11. La dirección IP obtenida en el paso anterior corresponde a la dirección asociada al adaptador de red de la máquina virtual. Tome nota de esta dirección porque se utilizará para acceder a los servicios desde su pc local
 
@@ -72,7 +72,7 @@ Una vez haya descargado e instalado Postman, ejecute este programa siga los sigu
 
 3. En el campo Name ingrese el nombre para el conjunto de pruebas o servicios, por ejemplo Ejemplo FotoAlpes. Luego haga clic en el botón Create
 
-   <img src="C:\Users\Carlos Cortes\Documents\Uniandes\Asistencia Graduada\MISO\Curso AAS\Ejemplo Foto AlpesV2\img\Crear_Coleccion.png" alt="Crear_Coleccion" style="zoom:75%;" />
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Crear_Coleccion.png" alt="Crear_Coleccion" style="zoom:75%;" />
 
 4. Nuevamente haga clic en el botón New
 
@@ -84,7 +84,7 @@ Una vez haya descargado e instalado Postman, ejecute este programa siga los sigu
 
 8. Haga clic el el botón Save to ....
 
-   <img src="C:\Users\Carlos Cortes\Documents\Uniandes\Asistencia Graduada\MISO\Curso AAS\Ejemplo Foto AlpesV2\img\Crear_Request.png" alt="Crear_Request" style="zoom:75%;" />
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Crear_Request.png" alt="Crear_Request" style="zoom:75%;" />
 
 9. Dependiendo del servicio a probar seleccione el método requerido. Para las operaciones de consulta, el método es Get. Para las operaciones de creación el método es Post y para las operaciones de modificación el método es Put. El ejemplo no implementa ningún otro tipo de operaciones.
 
@@ -94,10 +94,10 @@ Una vez haya descargado e instalado Postman, ejecute este programa siga los sigu
 
 12. En la opción Body de la respuesta recibida se puede ver la información que retorna el servicio
 
-    <img src="C:\Users\Carlos Cortes\Documents\Uniandes\Asistencia Graduada\MISO\Curso AAS\Ejemplo Foto AlpesV2\img\Listar_Usuarios.png" alt="Listar_Usuarios" style="zoom:75%;" />
+    <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Listar_Usuarios.png" alt="Listar_Usuarios" style="zoom:75%;" />
 
 
 
 Para el caso de las operaciones que usan los métodos Post y Put se debe especificar la información requerida por el servicio. Esta información se debe definir en formato Json en la opción Body del Request. La siguiente imagen muestra la definición de los datos para crear un nuevo usuario:
 
-<img src="C:\Users\Carlos Cortes\Documents\Uniandes\Asistencia Graduada\MISO\Curso AAS\Ejemplo Foto AlpesV2\img\Crear_Usuario.png" alt="Crear_Usuario" style="zoom:75%;" />
+<img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Crear_Usuario.png" alt="Crear_Usuario" style="zoom:75%;" />
