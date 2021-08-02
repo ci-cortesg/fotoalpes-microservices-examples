@@ -1,10 +1,12 @@
 from base import app, api, ma, db, Product, product_schema, products_schema, q, Resource, Flask, request
 from sender import send_product
 from putter import put_product
+from flask_jwt_extended import jwt_required
+
 
 
 class ProductListResource(Resource):
-
+    @jwt_required()
     def post(self):
         new_product = Product(
             name=request.json['name'],
@@ -18,7 +20,7 @@ class ProductListResource(Resource):
         return product_schema.dump(new_product)
 
 class ProductResource(Resource):
-    
+    @jwt_required()
     def put(self, product_id):
         product = Product.query.get_or_404(product_id)
         if 'name' in request.json:
@@ -41,4 +43,4 @@ api.add_resource(ProductResource, '/api-commands/products/<int:product_id>')
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', ssl_context='adhoc')

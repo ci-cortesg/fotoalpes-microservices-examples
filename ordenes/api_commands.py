@@ -1,9 +1,11 @@
 from base import app, api, ma, db, Order, User, Product, order_schema, orders_schema, q, process_order, Resource, Flask, request, jsonify
+from flask_jwt_extended import jwt_required
+
 
 
 
 class OrderListResource(Resource):
-
+    @jwt_required()
     def post(self):
         user = User.query.get(request.json['user'])
         product = Product.query.get(request.json['product'])
@@ -29,4 +31,4 @@ api.add_resource(OrderListResource, '/api-commands/orders')
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', ssl_context='adhoc')

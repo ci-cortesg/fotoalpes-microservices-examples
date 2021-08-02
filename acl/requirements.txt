@@ -4,10 +4,5 @@ Flask-RESTful
 Flask-SQLAlchemy
 SQLAlchemy
 marshmallow-sqlalchemy
-requests
-redis
-rq
-flask-jwt-extended
-pyopenssl
 flask-jwt-extended
 pyopenssl

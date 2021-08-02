@@ -4,6 +4,18 @@ services:
     image: redis
     volumes: 
       - ./data:/data
+  acl-queries:
+    volumes:
+        - ./acl/:/mnt/
+    build: ./acl
+    working_dir: /backend/
+    command: sh run.sh
+  jwt-queries:
+    volumes:
+        - ./jwt/:/mnt/
+    build: ./jwt
+    working_dir: /backend/
+    command: sh run.sh
   users-commands:
     volumes:
         - ./usuarios/:/mnt/
@@ -72,9 +84,11 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - 5000:80
+      - 5000:443
     volumes:
         - ./nginx/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+        - ./nginx/localhost.crt:/etc/ssl/certs/localhost.crt
+        - ./nginx/localhost.key:/etc/ssl/private/localhost.key
     depends_on:
         - orders-commands
         - orders-queries
@@ -82,3 +96,4 @@ services:
         - users-queries
         - products-commands
         - products-queries
+        - jwt-queries
