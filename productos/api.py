@@ -2,11 +2,17 @@ from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
+from flask_jwt_extended import JWTManager
+from flask_jwt_extended import jwt_required
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////mnt/productos.db'
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
+app.config["JWT_SECRET_KEY"] = "secret-jwt"  # Change this!
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = False
+
+jwt = JWTManager(app)
 api = Api(app)
 
 
@@ -29,10 +35,12 @@ products_schema = ProductSchema(many=True)
 
 
 class ProductListResource(Resource):
+    @jwt_required()
     def get(self):
         products = Product.query.all()
         return products_schema.dump(products)
 
+    @jwt_required()
     def post(self):
         new_product = Product(
             name=request.json['name'],
@@ -46,10 +54,12 @@ class ProductListResource(Resource):
 
 
 class ProductResource(Resource):
+    @jwt_required()
     def get(self, product_id):
         product = Product.query.get_or_404(product_id)
         return product_schema.dump(product)
     
+    @jwt_required()
     def put(self, product_id):
         product = Product.query.get_or_404(product_id)
         if 'name' in request.json:
@@ -71,4 +81,4 @@ api.add_resource(ProductResource, '/products/<int:product_id>')
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', ssl_context='adhoc')

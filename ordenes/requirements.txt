@@ -8,3 +8,5 @@ requests
 pika
 redis
 rq
+flask-jwt-extended
+pyopenssl
