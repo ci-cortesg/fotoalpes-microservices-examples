@@ -2,7 +2,7 @@
 
 ## Instalación
 
-Si usted descargó la imagen de la máquina virtual para Virtual Box omita esta sección y pase a la sección Ejecución. Los servicios de este ejemplo requieren de *docker* y *docker-compose*. Se debe ejecutar el archivo install.sh para instalar las librerías y los servicios. Después de ejecutar el archivo se debe reiniciar la máquina virtual.
+Si usted descargó la imagen de la máquina virtual para Virtual Box omita esta sección y pase a la sección Ejecución. Los servicios de este ejemplo requieren de *flask*, *redis*, *docker* y *docker-compose*. Se debe clonar este repositorio y, en caso de usar Linux Ubuntu ejecutar el archivo install.sh para instalar las librerías y los servicios. Después de ejecutar el archivo se debe reiniciar la máquina virtual. Si usa un sistema operativo distinto, debe instalar las librerías requeridas de manera manual.
 
 ```
 sh install.sh
@@ -35,7 +35,7 @@ El ejemplo implementa tres servicios:
 
 Al implemetar el patrón CQRS las operaciones que expone este servicio se implementan en dos partes:   comandos (api_commands.py) y consultas (api_queries.py). En el archivo api_comands se tienen las siguientes operaciones:
 
-- Crear una nueva orden: OrderListResource - post
+- Crear una nueva orden: Esta operación se implementa en la función OrderListResource a través del método post.
 
 Se puede observar que una vez creada la orden se coloca en la cola el id de la orden para que esta sea procesada.
 
@@ -46,31 +46,31 @@ q.enqueue(process_order, new_order.id)
 
 En el archivo api_queries se tienen las siguientes operaciones:
 
-- Listar todas las órdenes: OrderListResource - get
-- Consultar una orden específica: OrderResource - get
+- Listar todas las órdenes: Esta operación se implementa en la función OrderListResource a través del método get.
+- Consultar una orden específica: Esta operación se implementa en la función OrderResource a través del método get.
 
 #### Productos
 
 Al implemetar el patrón CQRS las operaciones que expone este servicio se implementan en dos partes:   comandos (api_commands.py) y consultas (api_queries.py). En el archivo api_comands se tienen las siguientes operaciones:
 
-- Crear un nuevo producto: ProductListResource - post
-- Modificar un producto: ProductResource - put
+- Crear un nuevo producto: Esta operación se implementa en la función ProductListResource a través del método post.
+- Modificar un producto: Esta operación se implementa en la función ProductResource a través del método put.
 
 En el archivo api_queries se tienen las siguientes operaciones:
 
-- Listar todos los productos: ProductListResource - get
-- Consultar un producto específico: ProductResource - get
+- Listar todos los productos: Esta operación se implementa en la función ProductListResource a través del método get.
+- Consultar un producto específico: Esta operación se implementa en la función ProductResource a través del método get.
 
 #### Usuarios
 
 Al implemetar el patrón CQRS las operaciones que expone este servicio se implementan en dos partes:   comandos (api_commands.py) y consultas (api_queries.py). En el archivo api_comands se tienen las siguientes operaciones:
 
-- Crear un nuevo usuario: UserListResource - post
+- Crear un nuevo usuario: Esta operación se implementa en la función UserListResource a través del método post.
 
 En el archivo api_queries se tienen las siguientes operaciones:
 
-- Listar todos los usuarios: UserListResource - get
-- Consultar un usuario específico: UserResource - get
+- Listar todos los usuarios: Esta operación se implementa en la función UserListResource a través del método get.
+- Consultar un usuario específico: Esta operación se implementa en la función UserResource a través del método get.
 
 #### API Gateway
 
