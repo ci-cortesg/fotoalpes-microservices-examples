@@ -2,7 +2,7 @@
 
 ## Instalación
 
-Los servicios de este ejemplo requieren de *docker* y *docker-compose*. Se debe ejecutar el archivo install.sh para instalar las librerías y los servicios. Después de ejecutar el archivo se debe reiniciar la máquina virtual.
+Los servicios de este ejemplo requieren de *flask*, *redis*, *docker* y *docker-compose*. Se debe clonar este repositorio y, en caso de usar Linux Ubuntu ejecutar el archivo install.sh para instalar las librerías y los servicios. Después de ejecutar el archivo se debe reiniciar la máquina virtual. Si usa un sistema operativo distinto, debe instalar las librerías requeridas de manera manual.
 
 ```
 sh install.sh
@@ -31,11 +31,11 @@ Esta rama (sync) muestra la comunicación entre servicios de manera síncrona. E
 
 #### Ordenes
 
-Este servicio expone tres operaciones:
+Este servicio expone tres operaciones, lasd cuales se encuentran definidas en el archivo api.py:
 
-- Listar todas las órdenes: OrderListResource - get
-- Crear una nueva orden: OrderListResource - post
-- Consultar una orden específica: OrderResource - get
+- Listar todas las órdenes: Esta operación se implementa en la función OrderListResource a través del método get.
+- Crear una nueva orden: Esta operación se implementa en la función OrderListResource a través del método post.
+- Consultar una orden específica: Esta operación se implementa en la función OrderResource a través del método get.
 
 Se puede observar que la operación que crea una nueva orden valida que el producto y el usuario sean válidos. Para esto, utiliza las operaciones de consulta expuestas por los servicios Usuarios y Productos de manera síncrona.
 
@@ -48,18 +48,18 @@ product = requests.get(f"http://products:5000/products/{request.json['product']}
 
 Este servicio expone cuatro operaciones:
 
-- Listar todos los productos: ProductListResource - get
-- Crear un nuevo producto: ProductListResource - post
-- Consultar un producto específico: ProductResource - get
-- Modificar un producto: ProductResource - put
+- Listar todos los productos: Esta operación se implementa en la función ProductListResource a través del método get.
+- Crear un nuevo producto: Esta operación se implementa en la función ProductListResource a través del método post.
+- Consultar un producto específico: Esta operación se implementa en la función ProductResource a través del método get.
+- Modificar un producto: Esta operación se implementa en la función ProductResource a través del método put.
 
 #### Usuarios
 
 Este servicio expone tres operaciones:
 
-- Listar todos los usuarios: UserListResource - get
-- Crear un nuevo usuario: UserListResource - post
-- Consultar un usuario específico: UserResource - get
+- Listar todos los usuarios: Esta operación se implementa en la función UserListResource a través del método get
+- Crear un nuevo usuario: Esta operación se implementa en la función UserListResource a través del método post
+- Consultar un usuario específico: Esta operación se implementa en la función UserResource a través del método get
 
 #### API Gateway
 
