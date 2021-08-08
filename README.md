@@ -2,7 +2,7 @@
 
 ## Instalación
 
-Si usted descargó la imagen de la máquina virtual para Virtual Box omita esta sección y pase a la sección Ejecución. Los servicios de este ejemplo requieren de *docker* y *docker-compose*. Se debe ejecutar el archivo install.sh para instalar las librerías y los servicios. Después de ejecutar el archivo se debe reiniciar la máquina virtual.
+Si usted descargó la imagen de la máquina virtual para Virtual Box omita esta sección y pase a la sección Ejecución. LLos servicios de este ejemplo requieren de *flask*, *redis*, *docker* y *docker-compose*. Se debe clonar este repositorio y, en caso de usar Linux Ubuntu ejecutar el archivo install.sh para instalar las librerías y los servicios. Después de ejecutar el archivo se debe reiniciar la máquina virtual. Si usa un sistema operativo distinto, debe instalar las librerías requeridas de manera manual.
 
 ```
 sh install.sh
@@ -27,15 +27,15 @@ docker-compose up -d
 
 ## Descripción de los servicios
 
-Esta rama (main) muestra la comunicación entre servicios de manera asíncrona e implementa el patrón CQRS. Para la comunicación asíncrona se utiliza Redis como plataforma de mensajería.
+Esta rama (async-sec) muestra la comunicación entre servicios de manera asíncrona e implementa el patrón CQRS. Para la comunicación asíncrona se utiliza Redis como plataforma de mensajería. Para la seguridad se utiliza un certificado SSL para asegurar la comunicación entre los servicios y se implementa un componente encargado de la gestión de tokens para autenticar el llamado de los servicios expuestos. Finalmente se implementa un componente que valida que los servicios tengan permisos de usar las colas definidas en la plataforma de mensajería.
 
-El ejemplo implementa tres servicios:
+El ejemplo implementa cinco servicios:
 
 #### Ordenes
 
 Al implemetar el patrón CQRS las operaciones que expone este servicio se implementan en dos partes:   comandos (api_commands.py) y consultas (api_queries.py). En el archivo api_comands se tienen las siguientes operaciones:
 
-- Crear una nueva orden: OrderListResource - post
+- Crear una nueva orden: Esta operación se implementa en la función OrderListResource a través del método post.
 
 Se puede observar que una vez creada la orden se coloca en la cola el id de la orden para que esta sea procesada.
 
@@ -46,31 +46,49 @@ q.enqueue(process_order, new_order.id)
 
 En el archivo api_queries se tienen las siguientes operaciones:
 
-- Listar todas las órdenes: OrderListResource - get
-- Consultar una orden específica: OrderResource - get
+- Listar todas las órdenes: Esta operación se implementa en la función OrderListResource a través del método get.
+- Consultar una orden específica: Esta operación se implementa en la función OrderResource a través del método get.
 
 #### Productos
 
 Al implemetar el patrón CQRS las operaciones que expone este servicio se implementan en dos partes:   comandos (api_commands.py) y consultas (api_queries.py). En el archivo api_comands se tienen las siguientes operaciones:
 
-- Crear un nuevo producto: ProductListResource - post
-- Modificar un producto: ProductResource - put
+- Crear un nuevo producto: Esta operación se implementa en la función ProductListResource a través del método post.
+- Modificar un producto: Esta operación se implementa en la función ProductResource a través del método put.
 
 En el archivo api_queries se tienen las siguientes operaciones:
 
-- Listar todos los productos: ProductListResource - get
-- Consultar un producto específico: ProductResource - get
+- Listar todos los productos: Esta operación se implementa en la función ProductListResource a través del método get.
+- Consultar un producto específico: Esta operación se implementa en la función ProductResource a través del método get.
 
 #### Usuarios
 
 Al implemetar el patrón CQRS las operaciones que expone este servicio se implementan en dos partes:   comandos (api_commands.py) y consultas (api_queries.py). En el archivo api_comands se tienen las siguientes operaciones:
 
-- Crear un nuevo usuario: UserListResource - post
+- Crear un nuevo usuario: Esta operación se implementa en la función UserListResource a través del método post.
 
 En el archivo api_queries se tienen las siguientes operaciones:
 
-- Listar todos los usuarios: UserListResource - get
-- Consultar un usuario específico: UserResource - get
+- Listar todos los usuarios: Esta operación se implementa en la función UserListResource a través del método get.
+- Consultar un usuario específico: Esta operación se implementa en la función UserResource a través del método get.
+
+#### Jwt
+
+Este servicio se encarga de gestionar los tokens que deben ser utilizados por los demás servicios y expone una sola operación:
+
+- Crear token: Esta operación se implementa en la función AuthResource a través del método get, la cual retorna un token el cual se debe incluir en el llamado de cualquiera de los otros servicios descritos anteriormente. Se puede observar que antes de la definición de cada función en todos los servicios, se especifica una instrucción (@jwt_required) que obliga a la validación del token generado por la operación Crear token:
+
+```python
+class OrderListResource(Resource):
+    @jwt_required()
+    def get(self):
+```
+
+#### Acl
+
+Este servicio se encarga de validar que el servicio que intenta escribir en una cola de mensajería tenga los permisos para hacerlo. Expone una sola operación:
+
+- Validar permiso: Esta operación se implementa en la función AclResource a través del método get.
 
 #### API Gateway
 
@@ -114,6 +132,7 @@ location /api-queries/orders {
   proxy_set_header Host $host;
 }
 ```
+Adicionalmente se configura el servidor Ngnix para utilizar un certificado SSL autogenerado para cifrar la información que fluye entre los servicios y entre el usuario y el servidor Nginx, por lo que ahora se utiliza el protocolo https a diferencia de la rama sync en donde se utiliza el protocolo http.
 
 #### Comunicación asíncrona
 
