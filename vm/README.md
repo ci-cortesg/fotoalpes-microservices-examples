@@ -110,8 +110,8 @@ A contiuación se describen los parámetros requeridos por cada servicio, los cu
 
 Este servicio expone tres operaciones, las cuales se exponen de la siguiente manera para las ramas sync y sync-sec (reemplazar http por https):
 
-- Listar todas las órdenes: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/orders y no requiere de ningún parámetro adicional.
-- Crear una nueva orden:  El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/orders y se debe especificar en el Body del request la información de la nueva orden. El formato para la información de la nueva orden es un JSON similar al que sigue (los atributos user y producto se deben definir con el id de un usuario y un producto creados previamente):
+- Listar todas las órdenes: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/orders y no requiere de ningún parámetro adicional.
+- Crear una nueva orden:  El url para consumir este servicio, a través de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/orders y se debe especificar en el Body del request la información de la nueva orden. El formato para la información de la nueva orden es un JSON similar al que sigue (los atributos user y producto se deben definir con el id de un usuario y un producto creados previamente):
 ```json
 {
     "user":1,
@@ -119,12 +119,12 @@ Este servicio expone tres operaciones, las cuales se exponen de la siguiente man
     "quantity":10
 }
 ```
-- Consultar una orden específica: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/orders/<<id-orden>>, donde <<id-orden>> representa el id de la orden a consultar.
+- Consultar una orden específica: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/orders/<<id-orden>>, donde <<id-orden>> representa el id de la orden a consultar.
 
 Para las ramas async y async-sec (reemplazar http por https), al implemetar el patrón CQRS las operaciones que expone este servicio se exponen en dos partes: comandos y consultas:
 
-- Listar todas las órdenes: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/orders y no requiere de ningún parámetro adicional.
-- Crear una nueva orden:  El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/orders y se debe especificar en el Body del request la información de la nueva orden. El formato para la información de la nueva orden es un JSON similar al que sigue:
+- Listar todas las órdenes: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/orders y no requiere de ningún parámetro adicional.
+- Crear una nueva orden:  El url para consumir este servicio, a  través de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/orders y se debe especificar en el Body del request la información de la nueva orden. El formato para la información de la nueva orden es un JSON similar al que sigue:
 ```json
 {
     "user":1,
@@ -138,8 +138,8 @@ Para las ramas async y async-sec (reemplazar http por https), al implemetar el p
 
 Este servicio expone cuatro operaciones, las cuales se exponen de la siguiente manera para las ramas sync y sync-sec (reemplazar http por https):
 
-- Listar todos los productos: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/products y no requiere de ningún parámetro adicional.
-- Crear un nuevo producto: El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/products y se debe especificar en el Body del request la información del nuevo producto. El formato para la información del nuevo producto es un JSON similar al que sigue:
+- Listar todos los productos: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/products y no requiere de ningún parámetro adicional.
+- Crear un nuevo producto: El url para consumir este servicio, a través de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/products y se debe especificar en el Body del request la información del nuevo producto. El formato para la información del nuevo producto es un JSON similar al que sigue:
 ```json
 {
     "name":"Nombre del producto",
@@ -148,8 +148,8 @@ Este servicio expone cuatro operaciones, las cuales se exponen de la siguiente m
     "stock":0
 }
 ```
-- Consultar un producto específico: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/products/<<id-producto>>, donde <<id-producto>> representa el id del producto a consultar.
-- Modificar un producto: El url para consumir este servicio, através de una operación Put, es como sigue: http://XXX.XXX.XXX.XXX:5000/products/<<id-producto>>, donde <<id-producto>> corresponde al id del producto a modificar, y se debe especificar en el Body del request la información nueva información del producto. El formato para la información del producto es un JSON similar al que sigue:
+- Consultar un producto específico: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/products/<<id-producto>>, donde <<id-producto>> representa el id del producto a consultar.
+- Modificar un producto: El url para consumir este servicio, a través de una operación Put, es como sigue: http://XXX.XXX.XXX.XXX:5000/products/<<id-producto>>, donde <<id-producto>> corresponde al id del producto a modificar, y se debe especificar en el Body del request la información nueva información del producto. El formato para la información del producto es un JSON similar al que sigue:
 ```json
 {
     "name":"Nombre del producto",
@@ -160,8 +160,8 @@ Este servicio expone cuatro operaciones, las cuales se exponen de la siguiente m
 ```
 Para las ramas async y async-sec (reemplazar http por https), al implemetar el patrón CQRS las operaciones que expone este servicio se exponen en dos partes: comandos y consultas:
 
-- Listar todos los productos: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/products y no requiere de ningún parámetro adicional.
-- Crear un nuevo producto: El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/products y se debe especificar en el Body del request la información del nuevo producto. El formato para la información del nuevo producto es un JSON similar al que sigue:
+- Listar todos los productos: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/products y no requiere de ningún parámetro adicional.
+- Crear un nuevo producto: El url para consumir este servicio, a través de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/products y se debe especificar en el Body del request la información del nuevo producto. El formato para la información del nuevo producto es un JSON similar al que sigue:
 ```json
 {
     "name":"Nombre del producto",
@@ -170,8 +170,8 @@ Para las ramas async y async-sec (reemplazar http por https), al implemetar el p
     "stock":0
 }
 ```
-- Consultar un producto específico: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/products/<<id-producto>>, donde <<id-producto>> representa el id del producto a consultar.
-- Modificar un producto: El url para consumir este servicio, através de una operación Put, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/products/<<id-producto>>, donde <<id-producto>> corresponde al id del producto a modificar, y se debe especificar en el Body del request la información nueva información del producto. El formato para la información del producto es un JSON similar al que sigue:
+- Consultar un producto específico: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/products/<<id-producto>>, donde <<id-producto>> representa el id del producto a consultar.
+- Modificar un producto: El url para consumir este servicio, a través de una operación Put, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/products/<<id-producto>>, donde <<id-producto>> corresponde al id del producto a modificar, y se debe especificar en el Body del request la información nueva información del producto. El formato para la información del producto es un JSON similar al que sigue:
 ```json
 {
     "name":"Nombre del producto",
@@ -185,28 +185,28 @@ Para las ramas async y async-sec (reemplazar http por https), al implemetar el p
 
 Este servicio expone tres operaciones, las cuales se exponen de la siguiente manera para las ramas sync y sync-sec (reemplazar http por https):
 
-- Listar todos los usuarios: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/users y no requiere de ningún parámetro adicional.
-- Crear un nuevo usuario: El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/users y se debe especificar en el Body del request la información del nuevo usuario. El formato para la información del nuevo usuario es un JSON similar al que sigue:
+- Listar todos los usuarios: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/users y no requiere de ningún parámetro adicional.
+- Crear un nuevo usuario: El url para consumir este servicio, a través de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/users y se debe especificar en el Body del request la información del nuevo usuario. El formato para la información del nuevo usuario es un JSON similar al que sigue:
 ```json
 {
     "name":"Nombre del usuario"
 }
 ```
-- Consultar un usuario específico: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/users/<<id-usuario>>, donde <<id-usuario>> representa el id del usuario a consultar.
+- Consultar un usuario específico: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/users/<<id-usuario>>, donde <<id-usuario>> representa el id del usuario a consultar.
 
 Para las ramas async y async-sec (reemplazar http por https), al implemetar el patrón CQRS las operaciones que expone este servicio se exponen en dos partes: comandos y consultas:
 
-- Listar todos los usuarios: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/users y no requiere de ningún parámetro adicional.
-- Crear un nuevo usuario: El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/users y se debe especificar en el Body del request la información del nuevo usuario. El formato para la información del nuevo usuario es un JSON similar al que sigue:
+- Listar todos los usuarios: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/users y no requiere de ningún parámetro adicional.
+- Crear un nuevo usuario: El url para consumir este servicio, a través de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/users y se debe especificar en el Body del request la información del nuevo usuario. El formato para la información del nuevo usuario es un JSON similar al que sigue:
 ```json
 {
     "name":"Nombre del usuario"
 }
 ```
-- Consultar un usuario específico: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/users/<<id-usuario>>, donde <<id-usuario>> representa el id del usuario a consultar.
+- Consultar un usuario específico: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/users/<<id-usuario>>, donde <<id-usuario>> representa el id del usuario a consultar.
 
 ##### Jwt
 
 Este servicio expone una sola operación, las cual se expone de la siguiente manera para las ramas async y async-sec (reemplazar http por https):
 
-- Consultar token: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/jwt y no requiere de ningún parámetro adicional.
+- Consultar token: El url para consumir este servicio, a través de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/jwt y no requiere de ningún parámetro adicional.
