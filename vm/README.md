@@ -67,7 +67,17 @@ De manera alterna, esta máquina virual se ejecuta en una nube pública, lo cual
 
 Una vez los servicios se estén ejecutando podemos hacer pruebas de las funciones expuestas por estos. El ejemplo no implementa una interfaz de usuario por lo que debemos utilizar un programa que permita consumir servicios REST. Se sugiere utilizar [Postman](https://www.postman.com/downloads/) para ejecutar los servicios del ejemplo, por lo que debe descargarlo haciendo clic sobre el enlace anterior.
 
-Una vez haya descargado e instalado Postman, ejecute este programa siga los siguientes pasos:
+Una vez haya descargado e instalado Postman, ejecute este programa y deshabilite la opción de verificación del certificado SSL. Para esto, siga los siguientes pasos:
+
+1. Haga clic en el menú File --> Settings
+
+2. Se despliega una ventana con las opciones de configuración
+
+3. Deslice el botón SSL certification verification a la opción Off como se ve en la siguiente imagen.
+
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Postman_Settings.png" alt="Crear_Coleccion" style="zoom:75%;" />
+
+Para consumir alguno de los servicios implementados en el presente ejemplo, siga los siguientes pasos:
 
 1. Haga clic en el botón New
 
