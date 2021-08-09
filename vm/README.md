@@ -59,6 +59,7 @@ Para ejecutar el proyecto localmente, es necesario instalar [Oracle VirtualBox](
     sudo docker-compose up
     ```
 
+## VM en la nube
     
 De manera alterna, esta máquina virual se ejecuta en una nube pública, lo cual le permite pasar a la siguiente sección sin necesidad de tener que instalar nada en su computador de manera local. Tenga en cuenta que no es posible conectarse a la máquina virtual que se ejecuta en la nube para ejecutar comandos, solo se podrán consumir los servicios implementados en este ejemplo como se describe a continuación.
 
