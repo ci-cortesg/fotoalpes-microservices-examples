@@ -61,7 +61,7 @@ Para ejecutar el proyecto localmente, es necesario instalar [Oracle VirtualBox](
 
 ## VM en la nube
     
-De manera alterna, esta máquina virual se ejecuta en una nube pública, lo cual le permite pasar a la siguiente sección sin necesidad de tener que instalar nada en su computador de manera local. Tenga en cuenta que no es posible conectarse a la máquina virtual que se ejecuta en la nube para ejecutar comandos, solo se podrán consumir los servicios implementados en este ejemplo como se describe a continuación.
+De manera alterna, esta máquina virual se ejecuta en una nube pública, lo cual le permite pasar a la siguiente sección sin necesidad de tener que instalar nada en su computador de manera local. Tenga en cuenta que no es posible conectarse a la máquina virtual que se ejecuta en la nube para ejecutar comandos, solo se podrán consumir los servicios implementados para la rama async-sec como se describe a continuación.
 
 ## Pruebas
 
@@ -110,10 +110,23 @@ Para consumir alguno de los servicios implementados en el presente ejemplo, siga
     <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Listar_Usuarios.png" alt="Listar_Usuarios" style="zoom:75%;" />
 
 
-
 Para el caso de las operaciones que usan los métodos Post y Put se debe especificar la información requerida por el servicio. Esta información se debe definir en formato Json en la opción Body del Request. La siguiente imagen muestra la definición de los datos para crear un nuevo usuario:
 
-<img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Crear_Usuario.png" alt="Crear_Usuario" style="zoom:75%;" />
+<img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Crear_Usuario.png" alt="Postman_Settings" style="zoom:75%;" />
+
+## Pruebas para las ramas de seguridad
+
+Para los servicios de las ramas sync-sec y async-sec se deben tener en cuenta lo siguiente:
+
+Antes de consumir cualquiera de los servcios implementados, es obligatorio obtener el token de seguridad del componente jwt. Para esto, ejecute los pasos 1 a 11 descritos anteriormente y en el paso 10 especifique el siguiente url: https://XXX.XXX.XXX.XXX/api-queries/jwt. Reemplace XXX.XXX.XXX.XXX por la dirección IP de la máquina virtual obtenida en el paso 9 de la sección Instalación. Si está utilizando la máquina virtual que se ejecuta en la nube reemplace XXX.XXX.XXX.XXX por la siguiente dirección IP: 3.131.189.130.
+
+<img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Get_Jwt_Token.png" alt="Get_Jwt_Token" style="zoom:75%;" />
+
+Todos los servicios implementados esperan un token en el header de la solicitud, por lo que se debe incluir el token obtenido del componente jwt. Para incluir el token en la solicitud, siga los siguientes pasos 1 a 10 descritos anteriormente y antes de ejecutar el paso 11 haga clic en la opción Headers e incluya una nueva opción llamada Authorization y en la columna ubicada al frente incluya el token obtenido del componente jwt antecedido de la palabra Bearer más un espacio en blanco como se se muestra en la siguiente imagen:
+
+<img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Include_Token.png" alt="Include_Token" style="zoom:75%;" />
+
+## Descripción de los parámetros para las pruebas 
 
 A contiuación se describen los parámetros requeridos por cada servicio, los cuales deben ser tenidos en cuenta al momento de realizar las pruebas, como se mencionó en la sección anterior:
 
