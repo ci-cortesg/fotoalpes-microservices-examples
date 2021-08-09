@@ -2,13 +2,14 @@
 
 ## Instalación
 
-El ejemplo del caso Foto Alpes es un proyecto en Flask que implementa microservicios y las tácticas vistas en el curso Aritecturas ágiles de software. El presente repositorio contiene el código del ejemplo en diferentes ramas de acuerdo a los temas vistos. Las ramas del proyecto son:
+El ejemplo del caso Foto Alpes es un proyecto en Flask que implementa microservicios y las tácticas vistas en el curso Arquitecturas ágiles de software. El presente repositorio contiene el código del ejemplo en diferentes ramas de acuerdo a los temas vistos. Las ramas del proyecto son:
 
 - main: Rama que implementa CQRS y comunicación asíncrona
 - sync: Rama que implementa comunicación síncrona
-- security: Rama que implementa el uso de tokens y certificados de seguridad
+- sync-sec: Rama que implementa el uso de tokens y certificados de seguridad con  comunicación síncrona
+- async-sec: Rama que implementa el uso de tokens y certificados de seguridad con  comunicación asíncrona
 
-Para ejecutar el proyecto es necesario instalar [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) en un pc local. Una vez instalado, se debe descargar la imagen de la máquina virtual ([MISW4202-FotoAlpes-Microservicios.zip](https://uniandes-my.sharepoint.com/:u:/g/personal/ci_cortesg_uniandes_edu_co/EQMbaoWx1yZOl5cMyrQ-8rgBqzCjd4HWqfLmfYs1vbWFZQ?e=16NHt7)) e importarla en Virtualbox. Para importar la imagen se deben seguir los siguientes pasos:
+Para ejecutar el proyecto localmente, es necesario instalar [Oracle VirtualBox](https://www.virtualbox.org/wiki/Downloads) en su pc. Una vez instalado, se debe descargar la imagen de la máquina virtual ([MISW4202-FotoAlpes-Microservicios.zip](https://uniandes-my.sharepoint.com/:u:/g/personal/ci_cortesg_uniandes_edu_co/EQMbaoWx1yZOl5cMyrQ-8rgBqzCjd4HWqfLmfYs1vbWFZQ?e=16NHt7)) e importarla en Virtualbox. Para importar la imagen se deben seguir los siguientes pasos:
 
 1. Descargar el archivo MISW4202-FotoAlpes-Microservicios.zip
 
@@ -59,6 +60,7 @@ Para ejecutar el proyecto es necesario instalar [Oracle VirtualBox](https://www.
     ```
 
     
+De manera alterna, esta máquina virual se ejecuta en una nube pública, lo cual le permite pasar a la siguiente sección sin necesidad de tener que instalar nada en su computador de manera local. Tenga en cuenta que no es posible conectarse a la máquina virtual que se ejecuta en la nube para ejecutar comandos, solo se podrán consumir los servicios implementados en este ejemplo como se describe a continuación.
 
 ## Pruebas
 
@@ -88,7 +90,7 @@ Una vez haya descargado e instalado Postman, ejecute este programa siga los sigu
 
 9. Dependiendo del servicio a probar seleccione el método requerido. Para las operaciones de consulta, el método es Get. Para las operaciones de creación el método es Post y para las operaciones de modificación el método es Put. El ejemplo no implementa ningún otro tipo de operaciones.
 
-10. Ingrese el url del servicio y la operación a probar. Por ejemplo, para el caso de listar los usuarios, en la rama main, el url sería el siguiente: http://XXX.XXX.XXX.XXX/api-queries/users. Reemplace XXX.XXX.XXX.XXX por la dirección IP de la máquina virtual obtenida en el paso 9 de la sección **Instalación**
+10. Ingrese el url del servicio y la operación a probar. Por ejemplo, para el caso de listar los usuarios, en la rama main, el url sería el siguiente: http://XXX.XXX.XXX.XXX/api-queries/users. Reemplace XXX.XXX.XXX.XXX por la dirección IP de la máquina virtual obtenida en el paso 9 de la sección **Instalación**. Si está utilizando la máquina virtual que se ejecuta en la nube reemplace XXX.XXX.XXX.XXX por la siguiente dirección IP: 10.10.10.10.
 
 11. Haga clic en el botón Send
 
@@ -101,3 +103,110 @@ Una vez haya descargado e instalado Postman, ejecute este programa siga los sigu
 Para el caso de las operaciones que usan los métodos Post y Put se debe especificar la información requerida por el servicio. Esta información se debe definir en formato Json en la opción Body del Request. La siguiente imagen muestra la definición de los datos para crear un nuevo usuario:
 
 <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Crear_Usuario.png" alt="Crear_Usuario" style="zoom:75%;" />
+
+A contiuación se describen los parámetros requeridos por cada servicio, los cuales deben ser tenidos en cuenta al momento de realizar las pruebas, como se mencionó en la sección anterior:
+
+##### Ordenes
+
+Este servicio expone tres operaciones, las cuales se exponen de la siguiente manera para las ramas sync y sync-sec (reemplazar http por https):
+
+- Listar todas las órdenes: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/orders y no requiere de ningún parámetro adicional.
+- Crear una nueva orden:  El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/orders y se debe especificar en el Body del request la información de la nueva orden. El formato para la información de la nueva orden es un JSON similar al que sigue (los atributos user y producto se deben definir con el id de un usuario y un producto creados previamente):
+```json
+{
+    "user":1,
+    "product":1,
+    "quantity":10
+}
+```
+- Consultar una orden específica: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/orders/<<id-orden>>, donde <<id-orden>> representa el id de la orden a consultar.
+
+Para las ramas async y async-sec (reemplazar http por https), al implemetar el patrón CQRS las operaciones que expone este servicio se exponen en dos partes: comandos y consultas:
+
+- Listar todas las órdenes: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/orders y no requiere de ningún parámetro adicional.
+- Crear una nueva orden:  El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/orders y se debe especificar en el Body del request la información de la nueva orden. El formato para la información de la nueva orden es un JSON similar al que sigue:
+```json
+{
+    "user":1,
+    "product":1,
+    "quantity":10
+}
+```
+- Consultar una orden específica: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/orders/<<id-orden>>, donde <<id-orden>> representa el id de la orden a consultar.
+
+##### Productos
+
+Este servicio expone cuatro operaciones, las cuales se exponen de la siguiente manera para las ramas sync y sync-sec (reemplazar http por https):
+
+- Listar todos los productos: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/products y no requiere de ningún parámetro adicional.
+- Crear un nuevo producto: El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/products y se debe especificar en el Body del request la información del nuevo producto. El formato para la información del nuevo producto es un JSON similar al que sigue:
+```json
+{
+    "name":"Nombre del producto",
+    "description":"Descripción del producto",
+    "value":0,
+    "stock":0
+}
+```
+- Consultar un producto específico: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/products/<<id-producto>>, donde <<id-producto>> representa el id del producto a consultar.
+- Modificar un producto: El url para consumir este servicio, através de una operación Put, es como sigue: http://XXX.XXX.XXX.XXX:5000/products/<<id-producto>>, donde <<id-producto>> corresponde al id del producto a modificar, y se debe especificar en el Body del request la información nueva información del producto. El formato para la información del producto es un JSON similar al que sigue:
+```json
+{
+    "name":"Nombre del producto",
+    "description":"Descripción del producto",
+    "value":0,
+    "stock":0
+}
+```
+Para las ramas async y async-sec (reemplazar http por https), al implemetar el patrón CQRS las operaciones que expone este servicio se exponen en dos partes: comandos y consultas:
+
+- Listar todos los productos: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/products y no requiere de ningún parámetro adicional.
+- Crear un nuevo producto: El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/products y se debe especificar en el Body del request la información del nuevo producto. El formato para la información del nuevo producto es un JSON similar al que sigue:
+```json
+{
+    "name":"Nombre del producto",
+    "description":"Descripción del producto",
+    "value":0,
+    "stock":0
+}
+```
+- Consultar un producto específico: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/products/<<id-producto>>, donde <<id-producto>> representa el id del producto a consultar.
+- Modificar un producto: El url para consumir este servicio, através de una operación Put, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/products/<<id-producto>>, donde <<id-producto>> corresponde al id del producto a modificar, y se debe especificar en el Body del request la información nueva información del producto. El formato para la información del producto es un JSON similar al que sigue:
+```json
+{
+    "name":"Nombre del producto",
+    "description":"Descripción del producto",
+    "value":0,
+    "stock":0
+}
+```
+
+##### Usuarios
+
+Este servicio expone tres operaciones, las cuales se exponen de la siguiente manera para las ramas sync y sync-sec (reemplazar http por https):
+
+- Listar todos los usuarios: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/users y no requiere de ningún parámetro adicional.
+- Crear un nuevo usuario: El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/users y se debe especificar en el Body del request la información del nuevo usuario. El formato para la información del nuevo usuario es un JSON similar al que sigue:
+```json
+{
+    "name":"Nombre del usuario"
+}
+```
+- Consultar un usuario específico: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/users/<<id-usuario>>, donde <<id-usuario>> representa el id del usuario a consultar.
+
+Para las ramas async y async-sec (reemplazar http por https), al implemetar el patrón CQRS las operaciones que expone este servicio se exponen en dos partes: comandos y consultas:
+
+- Listar todos los usuarios: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/users y no requiere de ningún parámetro adicional.
+- Crear un nuevo usuario: El url para consumir este servicio, através de una operación Post, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-commands/users y se debe especificar en el Body del request la información del nuevo usuario. El formato para la información del nuevo usuario es un JSON similar al que sigue:
+```json
+{
+    "name":"Nombre del usuario"
+}
+```
+- Consultar un usuario específico: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/users/<<id-usuario>>, donde <<id-usuario>> representa el id del usuario a consultar.
+
+##### Jwt
+
+Este servicio expone una sola operación, las cual se expone de la siguiente manera para las ramas async y async-sec (reemplazar http por https):
+
+- Consultar token: El url para consumir este servicio, através de una operación Get, es como sigue: http://XXX.XXX.XXX.XXX:5000/api-queries/jwt y no requiere de ningún parámetro adicional.
