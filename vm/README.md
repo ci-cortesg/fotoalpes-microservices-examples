@@ -90,7 +90,7 @@ Una vez haya descargado e instalado Postman, ejecute este programa siga los sigu
 
 9. Dependiendo del servicio a probar seleccione el método requerido. Para las operaciones de consulta, el método es Get. Para las operaciones de creación el método es Post y para las operaciones de modificación el método es Put. El ejemplo no implementa ningún otro tipo de operaciones.
 
-10. Ingrese el url del servicio y la operación a probar. Por ejemplo, para el caso de listar los usuarios, en la rama main, el url sería el siguiente: http://XXX.XXX.XXX.XXX/api-queries/users. Reemplace XXX.XXX.XXX.XXX por la dirección IP de la máquina virtual obtenida en el paso 9 de la sección **Instalación**. Si está utilizando la máquina virtual que se ejecuta en la nube reemplace XXX.XXX.XXX.XXX por la siguiente dirección IP: 10.10.10.10.
+10. Ingrese el url del servicio y la operación a probar. Por ejemplo, para el caso de listar los usuarios, en la rama main, el url sería el siguiente: http://XXX.XXX.XXX.XXX/api-queries/users. Reemplace XXX.XXX.XXX.XXX por la dirección IP de la máquina virtual obtenida en el paso 9 de la sección **Instalación**. Si está utilizando la máquina virtual que se ejecuta en la nube reemplace XXX.XXX.XXX.XXX por la siguiente dirección IP: 3.131.189.130.
 
 11. Haga clic en el botón Send
 
