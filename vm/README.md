@@ -83,10 +83,6 @@ Para ejecutar el proyecto localmente, es necesario instalar [Oracle VirtualBox](
     sudo docker-compose up
     ```
 
-## VM en la nube
-    
-De manera alterna, esta máquina virual se ejecuta en una nube pública, lo cual le permite pasar a la siguiente sección sin necesidad de tener que instalar nada en su computador de manera local. Tenga en cuenta que no es posible conectarse a la máquina virtual que se ejecuta en la nube para ejecutar comandos, solo se podrán consumir los servicios implementados para la rama async-sec como se describe a continuación.
-
 ## Pruebas
 
 Una vez los servicios se estén ejecutando podemos hacer pruebas de las funciones expuestas por estos. El ejemplo no implementa una interfaz de usuario por lo que debemos utilizar un programa que permita consumir servicios REST. Se sugiere utilizar [Postman](https://www.postman.com/downloads/) para ejecutar los servicios del ejemplo, por lo que debe descargarlo haciendo clic sobre el enlace anterior.
