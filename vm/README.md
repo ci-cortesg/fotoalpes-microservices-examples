@@ -25,35 +25,59 @@ Para ejecutar el proyecto localmente, es necesario instalar [Oracle VirtualBox](
 
 5. En el menú izquierdo debe aparecer la máquina con el nombre del archivo seleccionado
 
-6. Dar clic en el botón Iniciar ubicado en la parte superior
+6. Dar clic en el botón Configuración en la parte superior
+
+7. En el menú izquierdo dar clic sobre la opción Sistema
+
+8. En la opción Chipset seleccionar la opción ICH9
+
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Change_Chipset_CH9.png" alt="Change_Chipset_CH9" style="zoom:75%;" />
+   
+9. En el menú izquierdo dar clic sobre la opción USB y desmarcar la opción "Habilitar Controlador USB"
+
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Disable_USB.png" alt="Disable_USB" style="zoom:75%;" />
+   
+10. Dar clic en el botón Aceptar en la parte inferior derecha
+
+11. Dar clic de nuevo en el botón Configuración en la parte superior
+
+12. En el menú izquierdo dar clic otra vez sobre la opción Sistema
+
+13. En la opción Chipset seleccionar la opción PIIX3
+
+   <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Change_Chipset_PIIX3.png" alt="Change_Chipset_PIIX3" style="zoom:75%;" />
+
+14. Dar clic en el botón Aceptar en la parte inferior derecha
+
+15. Dar clic en el botón Iniciar ubicado en la parte superior
 
    <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Iniciar_VM.png" alt="Iniciar_VM" style="zoom:75%;" />
 
-7. Una vez la máquina termine de cargar, debe visualizar la pantalla de inicio
+16. Una vez la máquina termine de cargar, debe visualizar la pantalla de inicio
 
    <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Pantalla_Inicio_VM.png" alt="Pantalla_Inicio_VM" style="zoom:75%;" />
 
-8. Ingresar con el usuario **estudiante** y la contraseña **Estudiante2021**
+17. Ingresar con el usuario **estudiante** y la contraseña **Estudiante2021**
 
-9. Ejecutar el siguiente comando:
+18. Ejecutar el siguiente comando:
 
    ```
    ifconfig
    ```
 
-10. Tomar nota de la dirección ip que se despliega en pantalla, como aparece en la siguiente imagen:
+19. Tomar nota de la dirección ip que se despliega en pantalla, como aparece en la siguiente imagen:
 
     <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Direccion_IP_VM.png" alt="Direccion_IP_VM" style="zoom:75%;" />
 
-11. La dirección IP obtenida en el paso anterior corresponde a la dirección asociada al adaptador de red de la máquina virtual. Tome nota de esta dirección porque se utilizará para acceder a los servicios desde su pc local
+20. La dirección IP obtenida en el paso anterior corresponde a la dirección asociada al adaptador de red de la máquina virtual. Tome nota de esta dirección porque se utilizará para acceder a los servicios desde su pc local
 
-12. Ubíquese en el directorio fotoalpes-microservices-examples ejecutando el siguiente comando:
+21. Ubíquese en el directorio fotoalpes-microservices-examples ejecutando el siguiente comando:
 
     ```
     cd fotoalpes-microservices-examples
     ```
 
-13. Para ejecutar los servicios, corra el siguiente comando:
+22. Para ejecutar los servicios, corra el siguiente comando:
 
     ```
     sudo docker-compose up
