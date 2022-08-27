@@ -121,7 +121,7 @@ Para consumir alguno de los servicios implementados en el presente ejemplo, siga
 
 9. Dependiendo del servicio a probar seleccione el método requerido. Para las operaciones de consulta, el método es Get. Para las operaciones de creación el método es Post y para las operaciones de modificación el método es Put. El ejemplo no implementa ningún otro tipo de operaciones.
 
-10. Ingrese el url del servicio y la operación a probar. Por ejemplo, para el caso de listar los usuarios, en la rama main, el url sería el siguiente: http://XXX.XXX.XXX.XXX/api-queries/users. Reemplace XXX.XXX.XXX.XXX por la dirección IP de la máquina virtual obtenida en el paso 9 de la sección **Instalación**. Si está utilizando la máquina virtual que se ejecuta en la nube reemplace XXX.XXX.XXX.XXX por la siguiente dirección IP: 3.131.189.130:5000.
+10. Ingrese el url del servicio y la operación a probar. Por ejemplo, para el caso de listar los usuarios, en la rama main, el url sería el siguiente: http://XXX.XXX.XXX.XXX/api-queries/users. Reemplace XXX.XXX.XXX.XXX por la dirección IP de la máquina virtual obtenida en el paso 19 de la sección **Instalación**.
 
 11. Haga clic en el botón Send
 
@@ -138,7 +138,7 @@ Para el caso de las operaciones que usan los métodos Post y Put se debe especif
 
 Para los servicios de las ramas sync-sec y async-sec se deben tener en cuenta lo siguiente:
 
-Antes de consumir cualquiera de los servcios implementados, es obligatorio obtener el token de seguridad del componente jwt. Para esto, ejecute los pasos 1 a 11 descritos anteriormente y en el paso 10 especifique el siguiente url: https://XXX.XXX.XXX.XXX/api-queries/jwt. Reemplace XXX.XXX.XXX.XXX por la dirección IP de la máquina virtual obtenida en el paso 9 de la sección Instalación. Si está utilizando la máquina virtual que se ejecuta en la nube reemplace XXX.XXX.XXX.XXX por la siguiente dirección IP: 3.131.189.130.
+Antes de consumir cualquiera de los servcios implementados, es obligatorio obtener el token de seguridad del componente jwt. Para esto, ejecute los pasos 1 a 11 descritos anteriormente y en el paso 10 especifique el siguiente url: https://XXX.XXX.XXX.XXX/api-queries/jwt. Reemplace XXX.XXX.XXX.XXX por la dirección IP de la máquina virtual obtenida en el paso 19 de la sección Instalación.
 
 <img src="https://github.com/ci-cortesg/fotoalpes-microservices-examples/blob/main/img/Get_Jwt_Token.png" alt="Get_Jwt_Token" style="zoom:75%;" />
 
